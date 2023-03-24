@@ -2,8 +2,9 @@ package org.Compiladores
 
 
 import java.util.Scanner
-import org.Compiladores.reservadas
+import org.Compiladores.Ttoken
 
+const val error: Boolean = false
 
 fun main(){
 
