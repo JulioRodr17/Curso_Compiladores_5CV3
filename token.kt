@@ -3,4 +3,25 @@ package org.Compiladores
 import org.Compiladores.Ttoken
 
 
-data class Token (var tipo: Ttoken,var lexema: String, var literal: Object, var linea: Int)
+class Token(    final var tipo: Ttoken,
+                final var lexema: String,
+                final var literal: Object, 
+                final var linea: Int ){
+
+  
+    // constructor(tipo:Ttoken, lexema:String, literal:Object){
+      //  println("$tipo $lexema $literal")
+    //  }
+    init{
+        this.tipo = tipo
+        this.lexema = lexema 
+        this.literal = literal 
+        this.linea = linea
+    }
+
+
+   // fun String?.plus(other: Any?): String
+
+}
+
+//fun String?.plus(other: Any?): String

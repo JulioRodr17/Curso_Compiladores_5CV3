@@ -18,20 +18,36 @@ public class Scanner {
         palabrasReservadas = new HashMap<>();
         palabrasReservadas.put("y", TipoToken.Y);
         palabrasReservadas.put("clase", TipoToken.CLASE);
-        /*palabrasReservadas.put("ademas", );
-        palabrasReservadas.put("falso", );
-        palabrasReservadas.put("para", );
-        palabrasReservadas.put("fun", ); //definir funciones
-        palabrasReservadas.put("si", );
-        palabrasReservadas.put("nulo", );
-        palabrasReservadas.put("o", );
-        palabrasReservadas.put("imprimir", );
-        palabrasReservadas.put("retornar", );
-        palabrasReservadas.put("super", );
-        palabrasReservadas.put("este", );
-        palabrasReservadas.put("verdadero", );
-        palabrasReservadas.put("var", ); //definir variables
-        palabrasReservadas.put("mientras", );*/
+        palabrasReservadas.put("id", TipoToken.ID);
+        palabrasReservadas.put("cadena", TipoToken.CAD);
+        palabrasReservadas.put("numero", TipoToken.NUM);
+        palabrasReservadas.put("parentIzq", TipoToken.IZ_PAR);
+        palabrasReservadas.put("parentDer", TipoToken.DER_PAR);
+        palabrasReservadas.put("llaveIzq", TipoToken.IZ_LLAVE);
+        palabrasReservadas.put("llaveDer", TipoToken.DER_LLAVE);
+        palabrasReservadas.put("coma", TipoToken.COMA);
+        palabrasReservadas.put("punto", TipoToken.PUNTO);
+        palabrasReservadas.put("puntoComa", TipoToken.PUNTO_COMA);
+        palabrasReservadas.put("menos", TipoToken.MENOS);
+        palabrasReservadas.put("mas", TipoToken.MAS);
+        palabrasReservadas.put("multiplica", TipoToken.MULTIPLICA);
+        palabrasReservadas.put("divide", TipoToken.DIVIDE);
+        palabrasReservadas.put("inverso", TipoToken.INV); //exclusivo para casos de tipo bool
+        palabrasReservadas.put("noIgual", TipoToken.NO_IGUAL);
+        palabrasReservadas.put("asignar", TipoToken.ASIGNAR);//=
+        palabrasReservadas.put("igual", TipoToken.IGUAL);//==
+        palabrasReservadas.put("menor", TipoToken.MENOR);
+        palabrasReservadas.put("menorIgual", TipoToken.MENOR_IGUAL);
+        palabrasReservadas.put("mayor", TipoToken.MAYOR);
+        palabrasReservadas.put("mayorIgual", TipoToken.MAYOR_IGUAL);
+        palabrasReservadas.put("comentLinea", TipoToken.CMNTRIO_LINEA);
+        palabrasReservadas.put("comentParrafo", TipoToken.CMNTRIO_PARRAFO);
+        
+
+
+
+
+
     }
 
     Scanner(String source){
