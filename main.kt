@@ -3,7 +3,7 @@ package org.Compiladores
 
 import java.util.Scanner
 import org.Compiladores.Ttoken
-import org.Compiladores.Token
+import org.Compiladores.CToken
 
 const val error: Boolean = false
 
