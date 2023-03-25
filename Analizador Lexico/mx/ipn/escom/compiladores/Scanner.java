@@ -55,44 +55,12 @@ public class Scanner {
     }
 
     List<Token> scanTokens(){
-        //Aquí va el corazón del scanner.
+      
+        
 
-        /*
-        Analizar el texto de entrada para extraer todos los tokens
-        y al final agregar el token de fin de archivo
-         */
+
         tokens.add(new Token(TipoToken.EOF, "", null, linea));
 
         return tokens;
     }
 }
-
-/*
-Signos o símbolos del lenguaje:
-(
-)
-{
-}
-,
-.
-;
--
-+
-*
-/
-!
-!=
-=
-==
-<
-<=
->
->=
-// -> comentarios (no se genera token)
-/* ... * / -> comentarios (no se genera token)
-Identificador,
-Cadena
-Numero
-Cada palabra reservada tiene su nombre de token
-
- */
