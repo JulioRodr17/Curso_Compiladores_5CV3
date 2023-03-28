@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 public class Scanner {
 
     private final String source;
@@ -12,6 +13,9 @@ public class Scanner {
     private final List<Token> tokens = new ArrayList<>();
 
     private int linea = 1;
+
+    private int actual;
+    private int columna;
 
     private static final Map<String, TipoToken> palabrasReservadas;
     static {
@@ -42,11 +46,6 @@ public class Scanner {
         palabrasReservadas.put("mayorIgual", TipoToken.MAYOR_IGUAL);
         palabrasReservadas.put("comentLinea", TipoToken.CMNTRIO_LINEA);
         palabrasReservadas.put("comentParrafo", TipoToken.CMNTRIO_PARRAFO);
-        
-
-
-
-
 
     }
 
@@ -55,12 +54,40 @@ public class Scanner {
     }
 
     List<Token> scanTokens(){
-      
-        
+        ignoraEspacios();
 
+        char c = avanza();
 
-        tokens.add(new Token(TipoToken.EOF, "", null, linea));
+        switch(c){
+            case '(': return Token(TipoToken.IZ_PAR, "(",null,actual);
+            case ')': return Token(TipoToken.DER_PAR, ")",null,actual);
+        }
 
         return tokens;
+    }
+
+    private void ignoraEspacios() {
+        while (!finalcad() && espacioBlanco(peek())) {
+        avanza();
+        }
+    }
+
+    private char avanza() {
+        actual++;
+        columna++;
+        return source.charAt(actual - 1);
+    }
+
+    private boolean finalcad() {
+        return actual >= source.length();
+    }
+
+    private char peek() {
+        if (finalcad()) return '\0';
+        return source.charAt(actual);
+    }
+
+    public static boolean espacioBlanco(char c) {
+        return c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == '\f';
     }
 }
