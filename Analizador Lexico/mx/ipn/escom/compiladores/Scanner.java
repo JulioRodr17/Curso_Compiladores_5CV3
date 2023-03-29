@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.lang.String;
+import java.util.regex.Pattern;
 
 
 public class Scanner {
@@ -17,77 +19,112 @@ public class Scanner {
     private int actual;
     private int columna;
 
+    public StringBuilder tope;
+
     private static final Map<String, TipoToken> palabrasReservadas;
+    private static final Map<String, TipoToken> signos;
+
     static {
         palabrasReservadas = new HashMap<>();
+        signos = new HashMap();
+
+       // palabrasReservadas.put("cadena", TipoToken.CAD);
+     //   palabrasReservadas.put("numero", TipoToken.NUM);
+
+     //signos utilizados para la lectura de funciones u otros
+        signos.put("(", TipoToken.IZ_PAR);
+        signos.put(")", TipoToken.DER_PAR);
+        signos.put("{", TipoToken.IZ_LLAVE);
+        signos.put("}", TipoToken.DER_LLAVE);
+        signos.put(",", TipoToken.COMA);
+        signos.put(".", TipoToken.PUNTO);
+        signos.put(";", TipoToken.PUNTO_COMA);
+        signos.put("-", TipoToken.MENOS);
+        signos.put("+", TipoToken.MAS);
+        signos.put("*", TipoToken.MULTIPLICA);
+        signos.put("/", TipoToken.DIVIDE);
+        signos.put("!", TipoToken.INV); //exclusivo para casos de tipo bool
+        signos.put("!=", TipoToken.NO_IGUAL);
+        signos.put("=", TipoToken.ASIGNAR);//=
+        signos.put("==", TipoToken.IGUAL);//==
+        signos.put("<", TipoToken.MENOR);
+        signos.put("<=", TipoToken.MENOR_IGUAL);
+        signos.put(">", TipoToken.MAYOR);
+        signos.put(">=", TipoToken.MAYOR_IGUAL);
+
+
+        //palabras reservadas que ayudan a la lectura
+        palabrasReservadas.put("false", TipoToken.FALSE );
+        palabrasReservadas.put("for", TipoToken.FOR );
+        palabrasReservadas.put("fun", TipoToken.FUN ); //definir funciones
+        palabrasReservadas.put("if", TipoToken.IF );
+        palabrasReservadas.put("null", TipoToken.NULL );
+        palabrasReservadas.put("else",TipoToken.ELSE );
+        palabrasReservadas.put("print", TipoToken.PRINT);
+        palabrasReservadas.put("return", TipoToken.RETURN);
+        palabrasReservadas.put("super",TipoToken.SUPER );
+        palabrasReservadas.put("this", TipoToken.THIS);
+        palabrasReservadas.put("true", TipoToken.TRUE);
+        palabrasReservadas.put("while", TipoToken.WHILE);
         palabrasReservadas.put("y", TipoToken.Y);
         palabrasReservadas.put("clase", TipoToken.CLASE);
         palabrasReservadas.put("id", TipoToken.ID);
-        palabrasReservadas.put("cadena", TipoToken.CAD);
-        palabrasReservadas.put("numero", TipoToken.NUM);
-        palabrasReservadas.put("parentIzq", TipoToken.IZ_PAR);
-        palabrasReservadas.put("parentDer", TipoToken.DER_PAR);
-        palabrasReservadas.put("llaveIzq", TipoToken.IZ_LLAVE);
-        palabrasReservadas.put("llaveDer", TipoToken.DER_LLAVE);
-        palabrasReservadas.put("coma", TipoToken.COMA);
-        palabrasReservadas.put("punto", TipoToken.PUNTO);
-        palabrasReservadas.put("puntoComa", TipoToken.PUNTO_COMA);
-        palabrasReservadas.put("menos", TipoToken.MENOS);
-        palabrasReservadas.put("mas", TipoToken.MAS);
-        palabrasReservadas.put("multiplica", TipoToken.MULTIPLICA);
-        palabrasReservadas.put("divide", TipoToken.DIVIDE);
-        palabrasReservadas.put("inverso", TipoToken.INV); //exclusivo para casos de tipo bool
-        palabrasReservadas.put("noIgual", TipoToken.NO_IGUAL);
-        palabrasReservadas.put("asignar", TipoToken.ASIGNAR);//=
-        palabrasReservadas.put("igual", TipoToken.IGUAL);//==
-        palabrasReservadas.put("menor", TipoToken.MENOR);
-        palabrasReservadas.put("menorIgual", TipoToken.MENOR_IGUAL);
-        palabrasReservadas.put("mayor", TipoToken.MAYOR);
-        palabrasReservadas.put("mayorIgual", TipoToken.MAYOR_IGUAL);
-        palabrasReservadas.put("comentLinea", TipoToken.CMNTRIO_LINEA);
-        palabrasReservadas.put("comentParrafo", TipoToken.CMNTRIO_PARRAFO);
 
     }
 
     Scanner(String source){
         this.source = source;
+        this.tope = new StringBuilder();
     }
 
     List<Token> scanTokens(){
-        ignoraEspacios();
 
-        char c = avanza();
 
-        switch(c){
-            case '(': return Token(TipoToken.IZ_PAR, "(",null,actual);
-            case ')': return Token(TipoToken.DER_PAR, ")",null,actual);
+        int num = 1;
+        int estado = 0;
+
+        for(int i = 0; i <= this.source.length() ; i++ ) {
+
+        char c = (i == this.source.length()) ? '\0' : this.source.charAt(i);
+
+        num = c == '\n' ? ++num :num;
+
+            switch (estado){
+                case 0:
+
+                    break;
+                case 10:
+
+                    break;
+
+                default:
+
+                    break;
+            }
+
+
+
+
+
+
+
+
         }
+
+
+        tokens.add(new Token(TipoToken.EOF, "", null, linea));
 
         return tokens;
     }
 
-    private void ignoraEspacios() {
-        while (!finalcad() && espacioBlanco(peek())) {
-        avanza();
-        }
+
+    private boolean transición(char c, String r){
+        return Pattern.compile(r).matcher(String.valueOf(c)).matches();
     }
 
-    private char avanza() {
-        actual++;
-        columna++;
-        return source.charAt(actual - 1);
+        
+
+
+   
     }
 
-    private boolean finalcad() {
-        return actual >= source.length();
-    }
-
-    private char peek() {
-        if (finalcad()) return '\0';
-        return source.charAt(actual);
-    }
-
-    public static boolean espacioBlanco(char c) {
-        return c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == '\f';
-    }
-}

@@ -61,6 +61,7 @@ public class Interprete {
     Interprete.error(....);
      */
     static void error(int linea, String mensaje){
+
         reportar(linea, "", mensaje);
     }
 
