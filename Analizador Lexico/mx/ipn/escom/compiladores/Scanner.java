@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.lang.String;
 import java.util.regex.Pattern;
+import java.util.*;
 
 
 public class Scanner {
@@ -18,6 +19,7 @@ public class Scanner {
 
     private int actual;
     private int columna;
+    private int num = 1;
 
     public StringBuilder tope;
 
@@ -51,7 +53,8 @@ public class Scanner {
         signos.put("<=", TipoToken.MENOR_IGUAL);
         signos.put(">", TipoToken.MAYOR);
         signos.put(">=", TipoToken.MAYOR_IGUAL);
-
+        signos.put("&&", TipoToken.AND);
+        signos.put("||", TipoToken.OR);
 
         //palabras reservadas que ayudan a la lectura
         palabrasReservadas.put("false", TipoToken.FALSE );
@@ -66,7 +69,7 @@ public class Scanner {
         palabrasReservadas.put("this", TipoToken.THIS);
         palabrasReservadas.put("true", TipoToken.TRUE);
         palabrasReservadas.put("while", TipoToken.WHILE);
-        palabrasReservadas.put("y", TipoToken.Y);
+
         palabrasReservadas.put("clase", TipoToken.CLASE);
         palabrasReservadas.put("id", TipoToken.ID);
 
@@ -80,17 +83,96 @@ public class Scanner {
     List<Token> scanTokens(){
 
 
-        int num = 1;
+
         int estado = 0;
 
         for(int i = 0; i <= this.source.length() ; i++ ) {
 
         char c = (i == this.source.length()) ? '\0' : this.source.charAt(i);
 
-        num = c == '\n' ? ++num :num;
+        num = c == '\n' ? ++num : num;
 
             switch (estado){
                 case 0:
+                    //agregar todos los casos para realizar las asignaciones en el autómata
+
+                    if( transición(c, "<")){
+                        estado = 1;
+                        tope.append(c);
+                }
+                    else if(transición(c, "=")){
+                        estado = 4;
+                        tope.append(c);
+                }
+                    else if(transición(c, ">")){
+                        estado = 7;
+                        tope.append(c);
+                }
+                    else if(transición(c, "!")){
+                        estado = 10;
+                        tope.append(c);
+                }
+                    else if(transición(c, "\\+")){
+                        estado = 12;
+                        tope.append(c);
+                }
+                    else if(transición(c, "-")){
+                        estado = 13;
+                        tope.append(c);
+                }
+                    else if(transición(c, "\\*")){
+                        estado = 14;
+                        tope.append(c);
+                }
+                    else if(transición(c, "\\|")){
+                        estado = 15;
+                        tope.append(c);
+                }
+                    else if(transición(c, "\\&")){
+                        estado = 16;
+                        tope.append(c);
+                }
+                    else if(transición(c, "\\(")){
+                        estado = 17;
+                        tope.append(c);
+                }
+                    else if(transición(c, "\\{")){
+                        estado = 19;
+                        tope.append(c);
+                }
+                    else if(transición(c, "\\}")){
+                        estado = 20;
+                        tope.append(c);
+                }
+                    else if(transición(c, "\\d")){
+                        estado = 22;
+                        tope.append(c);
+                }
+                    else if(transición(c, "[a-zA-Z]")){
+                        estado = 26;
+                        tope.append(c);
+                }
+                    else if(transición(c, ".")){
+                        estado = 24;
+                        tope.append(c);
+                }
+                    else if(transición(c, "\\s")){
+                        estado = 28;
+                        tope.append(c);
+                }
+                break;
+                case 1:
+
+
+
+
+
+
+
+
+
+
+
 
                     break;
                 case 10:
@@ -119,11 +201,28 @@ public class Scanner {
 
 
     private boolean transición(char c, String r){
+
         return Pattern.compile(r).matcher(String.valueOf(c)).matches();
     }
 
-        
+    private void agregarToken(String tok){
+        tokens.add(new Token(signos.get(tok), tok, null, num));
 
+        tope.delete(0, tope.length());
+    }
+
+
+    private void agregarTokenConLlave(String tok, TipoToken tt){
+        tokens.add(new Token(palabrasReservadas.getOrDefault(tok, tt.VAR), tok, null, num));
+
+        tope.delete(0, tope.length());
+    }
+
+    private void agregarToken2(String tok, TipoToken tt){
+        tokens.add(new Token(tt, tok, null, num));
+
+        tope.delete(0, tope.length());
+    }
 
    
     }
