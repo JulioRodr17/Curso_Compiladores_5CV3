@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.lang.String;
 import java.util.regex.Pattern;
-import java.util.*;
+
 
 
 public class Scanner {
@@ -28,7 +28,7 @@ public class Scanner {
 
     static {
         palabrasReservadas = new HashMap<>();
-        signos = new HashMap();
+        signos = new HashMap<>();
 
        // palabrasReservadas.put("cadena", TipoToken.CAD);
      //   palabrasReservadas.put("numero", TipoToken.NUM);
@@ -69,7 +69,6 @@ public class Scanner {
         palabrasReservadas.put("this", TipoToken.THIS);
         palabrasReservadas.put("true", TipoToken.TRUE);
         palabrasReservadas.put("while", TipoToken.WHILE);
-
         palabrasReservadas.put("clase", TipoToken.CLASE);
         palabrasReservadas.put("id", TipoToken.ID);
 
@@ -88,97 +87,267 @@ public class Scanner {
 
         for(int i = 0; i <= this.source.length() ; i++ ) {
 
-        char c = (i == this.source.length()) ? '\0' : this.source.charAt(i);
+            char c = (i == this.source.length()) ? '\0' : this.source.charAt(i);
 
-        num = c == '\n' ? ++num : num;
+            num = c == '\n' ? ++num : num;
 
             switch (estado){
                 case 0:
                     //agregar todos los casos para realizar las asignaciones en el autómata
 
-                    if( transición(c, "<")){
+                    if( transicion(c, "<")){
                         estado = 1;
                         tope.append(c);
                 }
-                    else if(transición(c, "=")){
+                    else if(transicion(c, "=")){
                         estado = 4;
                         tope.append(c);
                 }
-                    else if(transición(c, ">")){
+                    else if(transicion(c, ">")){
                         estado = 7;
                         tope.append(c);
                 }
-                    else if(transición(c, "!")){
+                    else if(transicion(c, "!")){
                         estado = 10;
                         tope.append(c);
                 }
-                    else if(transición(c, "\\+")){
-                        estado = 12;
+                    else if(transicion(c, "\\+")){
+                        estado = 30;
                         tope.append(c);
                 }
-                    else if(transición(c, "-")){
-                        estado = 13;
+                    else if(transicion(c, "-")){
+                        estado = 33;
                         tope.append(c);
                 }
-                    else if(transición(c, "\\*")){
-                        estado = 14;
+                    else if(transicion(c, "\\*")){
+                        estado = 35;
                         tope.append(c);
                 }
-                    else if(transición(c, "\\|")){
-                        estado = 15;
+                    else if(transicion(c, "\\|")){
+                        estado = 40;
                         tope.append(c);
                 }
-                    else if(transición(c, "\\&")){
-                        estado = 16;
+                    else if(transicion(c, "\\&")){
+                        estado = 43;
                         tope.append(c);
                 }
-                    else if(transición(c, "\\(")){
-                        estado = 17;
+                    else if(transicion(c, "\\(")){
+                        estado = 18;
                         tope.append(c);
                 }
-                    else if(transición(c, "\\{")){
-                        estado = 19;
+                    else if(transicion(c, "\\)")){
+                        estado = 18;
                         tope.append(c);
                 }
-                    else if(transición(c, "\\}")){
-                        estado = 20;
+                    else if(transicion(c, "\\{")){
+                        estado = 18;
                         tope.append(c);
                 }
-                    else if(transición(c, "\\d")){
+                    else if(transicion(c, "\\}")){
+                        estado = 18;
+                        tope.append(c);
+                }
+                    else if(transicion(c, "[0-9]")){
                         estado = 22;
                         tope.append(c);
                 }
-                    else if(transición(c, "[a-zA-Z]")){
+                    else if(transicion(c, "[a-zA-Z]")){
                         estado = 26;
                         tope.append(c);
                 }
-                    else if(transición(c, ".")){
+                    else if(c == '.'){
                         estado = 24;
                         tope.append(c);
-                }
-                    else if(transición(c, "\\s")){
+                } /*else if(transicion(c, "\\s")){
                         estado = 28;
                         tope.append(c);
                 }
+                    else if(transicion(c, "\\/")){
+                        estado = 38;
+                        tope.append(c);
+                    }*/
                 break;
                 case 1:
-
-
-
-
-
-
-
-
-
-
-
-
+                    if( transicion(c, "=")){
+                        estado = 2;
+                        tope.append(c);
+                }
+                    else{
+                        estado = 0;
+                        i = i-1;
+                        agregarToken(tope.toString());
+                    }
+                break;
+                case 2:
+                    estado = 0;
+                    i--;
+                    agregarToken(tope.toString());
                     break;
+
+                case 3:
+                    break;
+
+                case 4: 
+                    if( transicion(c, "=")){
+                        estado = 6;
+                        tope.append(c);
+                }
+                    else{
+                        estado = 0;
+                        i--;
+                        agregarToken(tope.toString());
+                    }
+                    break;
+
+                case 5:
+                    break;
+
+                case 6:
+                    estado = 0;
+                    i--;
+                    agregarToken(tope.toString());
+                    break;
+                
+                case 7: 
+                    if( transicion(c, "=")){
+                        estado = 8;
+                        tope.append(c);
+                }
+                    else{
+                        estado = 0;
+                        i--;
+                        agregarToken(tope.toString());
+                }
+                break;
+
+                case 8:
+                    estado = 0;
+                    i--;
+                    agregarToken(tope.toString());
+                    break;
+                
+                case 9: 
+                    break;
+                                      
                 case 10:
-
+                    if( transicion(c, "=")){
+                        estado = 11;
+                        tope.append(c);
+                }
+                    else{
+                        estado = 0;
+                        i--;
+                        agregarToken(tope.toString());
+                }
                     break;
 
+                case 11:
+                    estado = 0;
+                    i--;
+                    agregarToken(tope.toString());
+                    break;
+                case 20:
+                    if( transicion(c, "=")){
+                        estado = 21;
+                        tope.append(c);
+                }
+                    else{
+                        estado = 0;
+                        i--;
+                        agregarToken(tope.toString());
+                    }
+                break;
+
+                case 22:
+                    if(transicion(c, "[0-9]")){
+                        tope.append(c);
+                    }
+                    else if (c=='.'){
+
+                    }else if(c == 'E'){
+
+                    }
+                    else{
+                        estado = 0;
+                        i--;
+
+                        //agregarToken(tope.toString(), TipoToken.NUM);
+                        tokens.add(new Token(TipoToken.NUM, tope.toString(), new Double(tope.toString()), num));
+                        tope.delete(0, tope.length());
+
+                    }
+                    //if( transicion(c, "=")){
+                    /*if( c == '='){
+                        estado = 23;
+                        tope.append(c);
+                    }
+                    else{
+                        estado = 0;
+                        i--;
+                        agregarToken(tope.toString(), TipoToken.NUM);
+                    }*/
+                break;
+
+                case 23:
+
+                break;
+
+                case 24:
+                    if( transicion(c, "=")){
+                        estado = 25;
+                        tope.append(c);
+                }
+                    else{
+                        estado = 0;
+                        i--;
+                        agregarToken(tope.toString(), TipoToken.ID);
+                    }
+                break;
+
+
+                case 26:
+                    if(transicion(c, "[A-Za-z]") || transicion(c, "[0-9]")){
+                        //estado = 26
+                        tope.append(c);
+                    }else{
+                        estado = 0;
+                        TipoToken tt = palabrasReservadas.get(tope.toString());
+                        if(tt == null){
+                            tokens.add(new Token(TipoToken.ID, tope.toString(), null, num));
+                        }
+                        else{
+                            tokens.add(new Token(tt, tope.toString(), null, num));
+                        }
+                        i--;
+                        tope.delete(0, tope.length());
+                    }
+
+
+
+                    /*if( transicion(c, "=")){
+                        estado = 27;
+                        tope.append(c);
+                    }
+                    else{
+                        estado = 0;
+                        i--;
+                        agregarToken(tope.toString(), TipoToken.LETRA);
+                    }*/
+                break;
+
+                case 28:
+                    if( transicion(c, "=")){
+                        estado = 27;
+                        tope.append(c);
+                }
+                    else{
+                        estado = 0;
+                        i--;
+                        agregarToken(tope.toString(), TipoToken.CAD);
+                }
+                break;
+                    
+                
                 default:
 
                     break;
@@ -200,7 +369,7 @@ public class Scanner {
     }
 
 
-    private boolean transición(char c, String r){
+    private boolean transicion(char c, String r){
 
         return Pattern.compile(r).matcher(String.valueOf(c)).matches();
     }
@@ -212,18 +381,14 @@ public class Scanner {
     }
 
 
-    private void agregarTokenConLlave(String tok, TipoToken tt){
-        tokens.add(new Token(palabrasReservadas.getOrDefault(tok, tt.VAR), tok, null, num));
 
-        tope.delete(0, tope.length());
-    }
 
-    private void agregarToken2(String tok, TipoToken tt){
+    private void agregarToken(String tok, TipoToken tt){
         tokens.add(new Token(tt, tok, null, num));
 
         tope.delete(0, tope.length());
     }
 
-   
+
     }
 
