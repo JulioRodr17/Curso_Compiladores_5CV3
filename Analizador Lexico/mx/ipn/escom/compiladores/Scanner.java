@@ -95,63 +95,63 @@ public class Scanner {
                 case 0:
                     //agregar todos los casos para realizar las asignaciones en el autómata
 
-                    if( transicion(c, "<")){
+                    if( c == '<'){
                         estado = 1;
                         tope.append(c);
                 }
-                    else if(transicion(c, "=")){
+                    else if(c == '='){
                         estado = 4;
                         tope.append(c);
                 }
-                    else if(transicion(c, ">")){
+                    else if(c == '>'){
                         estado = 7;
                         tope.append(c);
                 }
-                    else if(transicion(c, "!")){
+                    else if(c == '!'){
                         estado = 10;
                         tope.append(c);
                 }
-                    else if(transicion(c, "\\+")){
+                    else if(c == "\\+"){
                         estado = 30;
                         tope.append(c);
                 }
-                    else if(transicion(c, "-")){
+                    else if(c == '-'){
                         estado = 33;
                         tope.append(c);
                 }
-                    else if(transicion(c, "\\*")){
+                    else if(c == "\\*"){
                         estado = 35;
                         tope.append(c);
                 }
-                    else if(transicion(c, "\\|")){
+                    else if(c == "\\|"){
                         estado = 40;
                         tope.append(c);
                 }
-                    else if(transicion(c, "\\&")){
+                    else if(c == "\\&"){
                         estado = 43;
                         tope.append(c);
                 }
-                    else if(transicion(c, "\\(")){
+                    else if(c == "\\("){
                         estado = 18;
                         tope.append(c);
                 }
-                    else if(transicion(c, "\\)")){
+                    else if(c == "\\)"){
                         estado = 18;
                         tope.append(c);
                 }
-                    else if(transicion(c, "\\{")){
+                    else if(c == "\\{"){
                         estado = 18;
                         tope.append(c);
                 }
-                    else if(transicion(c, "\\}")){
+                    else if(c == "\\}"){
                         estado = 18;
                         tope.append(c);
                 }
-                    else if(transicion(c, "[0-9]")){
+                    else if(c == "[0-9]"){
                         estado = 22;
                         tope.append(c);
                 }
-                    else if(transicion(c, "[a-zA-Z]")){
+                    else if(c == "[a-zA-Z]"){
                         estado = 26;
                         tope.append(c);
                 }
@@ -168,7 +168,7 @@ public class Scanner {
                     }*/
                 break;
                 case 1:
-                    if( transicion(c, "=")){
+                    if( c == '='){
                         estado = 2;
                         tope.append(c);
                 }
@@ -188,7 +188,7 @@ public class Scanner {
                     break;
 
                 case 4: 
-                    if( transicion(c, "=")){
+                    if( c == '='){
                         estado = 6;
                         tope.append(c);
                 }
@@ -209,7 +209,7 @@ public class Scanner {
                     break;
                 
                 case 7: 
-                    if( transicion(c, "=")){
+                    if( c == '='){
                         estado = 8;
                         tope.append(c);
                 }
@@ -225,12 +225,12 @@ public class Scanner {
                     i--;
                     agregarToken(tope.toString());
                     break;
-                
-                case 9: 
+
+                case 9:
                     break;
-                                      
+
                 case 10:
-                    if( transicion(c, "=")){
+                    if( c == '='){
                         estado = 11;
                         tope.append(c);
                 }
@@ -247,7 +247,7 @@ public class Scanner {
                     agregarToken(tope.toString());
                     break;
                 case 20:
-                    if( transicion(c, "=")){
+                    if( c == '='){
                         estado = 21;
                         tope.append(c);
                 }
@@ -259,7 +259,7 @@ public class Scanner {
                 break;
 
                 case 22:
-                    if(transicion(c, "[0-9]")){
+                    if(c == "[0-9]"){
                         tope.append(c);
                     }
                     else if (c=='.'){
@@ -276,8 +276,8 @@ public class Scanner {
                         tope.delete(0, tope.length());
 
                     }
-                    //if( transicion(c, "=")){
-                    /*if( c == '='){
+                    //if( c == '='){
+                    if( c == '='){
                         estado = 23;
                         tope.append(c);
                     }
@@ -285,7 +285,7 @@ public class Scanner {
                         estado = 0;
                         i--;
                         agregarToken(tope.toString(), TipoToken.NUM);
-                    }*/
+                    }
                 break;
 
                 case 23:
@@ -293,7 +293,7 @@ public class Scanner {
                 break;
 
                 case 24:
-                    if( transicion(c, "=")){
+                    if( c == '='){
                         estado = 25;
                         tope.append(c);
                 }
@@ -306,7 +306,7 @@ public class Scanner {
 
 
                 case 26:
-                    if(transicion(c, "[A-Za-z]") || transicion(c, "[0-9]")){
+                    if(c == "[a-zA-Z]" || c == "[0-9]"){
                         //estado = 26
                         tope.append(c);
                     }else{
@@ -322,9 +322,7 @@ public class Scanner {
                         tope.delete(0, tope.length());
                     }
 
-
-
-                    /*if( transicion(c, "=")){
+                    /*if( c == '='){
                         estado = 27;
                         tope.append(c);
                     }
@@ -336,7 +334,7 @@ public class Scanner {
                 break;
 
                 case 28:
-                    if( transicion(c, "=")){
+                    if( c == '='){
                         estado = 27;
                         tope.append(c);
                 }
@@ -346,20 +344,11 @@ public class Scanner {
                         agregarToken(tope.toString(), TipoToken.CAD);
                 }
                 break;
-                    
-                
+
                 default:
 
                     break;
             }
-
-
-
-
-
-
-
-
         }
 
 
