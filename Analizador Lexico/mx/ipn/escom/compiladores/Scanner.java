@@ -7,16 +7,12 @@ import java.util.Map;
 import java.lang.String;
 import java.util.regex.Pattern;
 
-
-
 public class Scanner {
 
     private final String source;
-
     private final List<Token> tokens = new ArrayList<>();
 
     private int linea = 1;
-
     private int actual;
     private int columna;
     private int num = 1;
@@ -30,8 +26,8 @@ public class Scanner {
         palabrasReservadas = new HashMap<>();
         signos = new HashMap<>();
 
-       // palabrasReservadas.put("cadena", TipoToken.CAD);
-     //   palabrasReservadas.put("numero", TipoToken.NUM);
+    // palabrasReservadas.put("cadena", TipoToken.CAD);
+    //   palabrasReservadas.put("numero", TipoToken.NUM);
 
      //signos utilizados para la lectura de funciones u otros
         signos.put("(", TipoToken.IZ_PAR);
@@ -71,7 +67,6 @@ public class Scanner {
         palabrasReservadas.put("while", TipoToken.WHILE);
         palabrasReservadas.put("clase", TipoToken.CLASE);
         palabrasReservadas.put("id", TipoToken.ID);
-
     }
 
     Scanner(String source){
@@ -80,8 +75,6 @@ public class Scanner {
     }
 
     List<Token> scanTokens(){
-
-
 
         int estado = 0;
 
@@ -158,11 +151,11 @@ public class Scanner {
                     else if(c == '.'){
                         estado = 24;
                         tope.append(c);
-                } /*else if(transicion(c, "\\s")){
+                } /*else if(c== "\\/"){
                         estado = 28;
                         tope.append(c);
                 }
-                    else if(transicion(c, "\\/")){
+                    else if(c == "\\/"){
                         estado = 38;
                         tope.append(c);
                     }*/
@@ -187,7 +180,7 @@ public class Scanner {
                 case 3:
                     break;
 
-                case 4: 
+                case 4:
                     if( c == '='){
                         estado = 6;
                         tope.append(c);
@@ -207,8 +200,8 @@ public class Scanner {
                     i--;
                     agregarToken(tope.toString());
                     break;
-                
-                case 7: 
+
+                case 7:
                     if( c == '='){
                         estado = 8;
                         tope.append(c);
@@ -270,11 +263,9 @@ public class Scanner {
                     else{
                         estado = 0;
                         i--;
-
                         //agregarToken(tope.toString(), TipoToken.NUM);
                         tokens.add(new Token(TipoToken.NUM, tope.toString(), new Double(tope.toString()), num));
                         tope.delete(0, tope.length());
-
                     }
                     //if( c == '='){
                     if( c == '='){
@@ -289,7 +280,6 @@ public class Scanner {
                 break;
 
                 case 23:
-
                 break;
 
                 case 24:
@@ -303,7 +293,6 @@ public class Scanner {
                         agregarToken(tope.toString(), TipoToken.ID);
                     }
                 break;
-
 
                 case 26:
                     if(c == "[a-zA-Z]" || c == "[0-9]"){
@@ -346,38 +335,28 @@ public class Scanner {
                 break;
 
                 default:
-
-                    break;
+                break;
             }
         }
 
-
         tokens.add(new Token(TipoToken.EOF, "", null, linea));
-
         return tokens;
     }
 
-
     private boolean transicion(char c, String r){
-
         return Pattern.compile(r).matcher(String.valueOf(c)).matches();
     }
 
     private void agregarToken(String tok){
         tokens.add(new Token(signos.get(tok), tok, null, num));
-
         tope.delete(0, tope.length());
     }
-
-
-
 
     private void agregarToken(String tok, TipoToken tt){
         tokens.add(new Token(tt, tok, null, num));
-
         tope.delete(0, tope.length());
     }
 
 
-    }
+}
 
