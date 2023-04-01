@@ -88,19 +88,19 @@ public class Scanner {
                 case 0:
                     //agregar todos los casos para realizar las asignaciones en el autómata
 
-                    if( c == '<'){
+                    if( transicion(c , "<")){
                         estado = 1;
                         tope.append(c);
                 }
-                    else if(c == '='){
+                    else if(transicion(c , "=")){
                         estado = 4;
                         tope.append(c);
                 }
-                    else if(c == '>'){
+                    else if(transicion(c , ">")){
                         estado = 7;
                         tope.append(c);
                 }
-                    else if(c == '!'){
+                    else if(transicion(c , "!")){
                         estado = 10;
                         tope.append(c);
                 }
@@ -257,8 +257,10 @@ public class Scanner {
                     }
                     else if (c=='.'){
 
-                    }else if(c == 'E'){
-
+                    }else if(transicion(c, "[e|E]")){
+                        if(transicion(c, "[+|-]")){
+                            
+                        }
                     }
                     else{
                         estado = 0;
@@ -268,7 +270,7 @@ public class Scanner {
                         tope.delete(0, tope.length());
                     }
                     //if( c == '='){
-                    if( c == '='){
+                   /* if( c == '='){
                         estado = 23;
                         tope.append(c);
                     }
@@ -276,7 +278,7 @@ public class Scanner {
                         estado = 0;
                         i--;
                         agregarToken(tope.toString(), TipoToken.NUM);
-                    }
+                    }*/
                 break;
 
                 case 23:
@@ -344,6 +346,7 @@ public class Scanner {
     }
 
     private boolean transicion(char c, String r){
+
         return Pattern.compile(r).matcher(String.valueOf(c)).matches();
     }
 
