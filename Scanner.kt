@@ -1,12 +1,13 @@
 package org.Compiladores
 
 import org.Compiladores.Ttoken
-
+import java.util.ArrayList
 
 class Scanner{
     private final var source: String = ""
 
-    private final lateinit var tokens:  List<Token>
+    private final var tokens:  List<Token> = ArrayList()
+
 
     private var linea: Int = 1
 
@@ -42,13 +43,13 @@ class Scanner{
         palabrasReservadas.put("comentParrafo", Ttoken.CMNTRIO_PARRAFO)
     }
 
-    fun Scanner(source: String){
+    constructor(source: String){
         this.source = source
     }
 
     fun scanTokens(): List<Token>{
 
-        
+     //   tokens.add(Token(Ttoken.EOF,"",null, linea))
         return tokens
     }
 
@@ -59,3 +60,5 @@ class Scanner{
 
 
 }
+
+
