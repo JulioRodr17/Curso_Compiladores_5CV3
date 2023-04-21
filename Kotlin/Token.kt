@@ -1,11 +1,12 @@
 package org.Compiladores
 
 import org.Compiladores.Ttoken
+import org.omg.CORBA.Object
 
 
-class Token(){
+class Token() {
 
-    constructor(tipo: Ttoken, lexema: String, literal: Any, linea: Int): this(){
+    constructor(tipo: Ttoken, lexema: String, literal: Object?, linea: Int): this(){
         this.tipo = tipo
         this.lexema = lexema
         this.literal = literal
@@ -14,7 +15,7 @@ class Token(){
 
     final var tipo: Ttoken = Ttoken.EOF
     final var lexema: String = ""
-    final var literal: Any = Any()
+    final var literal: Object? = null
     final var linea: Int = 0
 
     // constructor(tipo:Ttoken, lexema:String, literal:Object){
@@ -27,16 +28,16 @@ class Token(){
         this.linea = linea
     }*/
 
-    
+
     override fun toString(): String{
-        return "${tipo.name + lexema + literal}"
+        return "Tipo: $tipo Lexema: $lexema Literal: $literal Linea: $linea"
     }
 
     fun holaMundo():String{
         return "Hola mundo"
     }
 
-   
+
 
 }
 
