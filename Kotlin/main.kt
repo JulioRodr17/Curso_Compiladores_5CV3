@@ -1,8 +1,6 @@
-package org.Compiladores
+package org.Compiladores.Kotlin
 
 
-import org.Compiladores.Token
-import org.Compiladores.Scanner
 import java.io.IOException
 import java.nio.charset.Charset
 import java.nio.file.Files
@@ -16,16 +14,19 @@ import java.io.BufferedReader
 
 
 
-@kotlin.jvm.Throws fun main(args: String){
+@kotlin.jvm.Throws fun main(args: Array<String>){
     IOException()
-    if(args.length > 1){
+    if(args.size > 1){
        println("Uso correcto: interprete [script]")
 
         // Convención defininida en el archivo "system.h" de UNIX
         System.exit(64)
     }
-    else if(args.length == 1){
+    else if(args.size == 1){
         ejecutarArchivo(args[0].toString())
+    }
+    else{
+        ejecutarPrompt()
     }
 
 
@@ -55,6 +56,10 @@ fun ejecutar(source: String){
     var scanner = Scanner(source)
     val tokens: List<Token> =scanner.scanTokens()
 
+    for(token: Token in tokens){
+        println(token)
+    }
+
 
 
 }
@@ -65,7 +70,7 @@ fun ejecutarPrompt(){
     var reader:BufferedReader = BufferedReader(input)
     val v: Boolean = true
     do{
-        print("--->")
+        println("--->")
         var linea: String =reader.readLine()
         if(linea == null) break // Ctrl + C
         ejecutar(linea)

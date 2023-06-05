@@ -1,11 +1,9 @@
-package org.Compiladores
-
-import org.Compiladores.Ttoken
+package org.Compiladores.Kotlin
 
 
 class Token(){
 
-    constructor(tipo: Ttoken, lexema: String, literal: Any, linea: Int): this(){
+    constructor(tipo: Ttoken, lexema: String, literal: Any?, linea: Int): this(){
         this.tipo = tipo
         this.lexema = lexema
         this.literal = literal
@@ -14,7 +12,7 @@ class Token(){
 
     final var tipo: Ttoken = Ttoken.EOF
     final var lexema: String = ""
-    final var literal: Any = Any()
+    final var literal: Any? = null
     final var linea: Int = 0
 
     // constructor(tipo:Ttoken, lexema:String, literal:Object){

@@ -1,15 +1,16 @@
-package org.Compiladores
+package org.Compiladores.Kotlin
 
-import org.Compiladores.Ttoken
 import java.util.ArrayList
 
 class Scanner{
     private final var source: String = ""
 
-    private final var tokens:  List<Token> = ArrayList()
+    private final var tokens:  MutableList<Token> = ArrayList()
 
 
     private var linea: Int = 1
+
+    var tope: String = ""
 
 
    private final var palabrasReservadas = hashMapOf<String, Ttoken>()
@@ -45,11 +46,26 @@ class Scanner{
 
     constructor(source: String){
         this.source = source
+        this.tope = tope
     }
 
     fun scanTokens(): List<Token>{
 
-     //   tokens.add(Token(Ttoken.EOF,"",null, linea))
+        var estado: Int = 0
+
+        for(j in source){
+
+            var c: Char = if (j.code == this.source.length) '\u0000' else this.source[j.code]
+            var num = 0
+            num = if (c == '\n'){ ++num} else {num}
+
+            when(estado){
+                
+                    
+            }
+
+        }
+        tokens.add(Token(Ttoken.EOF,"",null, linea))
         return tokens
     }
 
@@ -60,5 +76,6 @@ class Scanner{
 
 
 }
+
 
 
