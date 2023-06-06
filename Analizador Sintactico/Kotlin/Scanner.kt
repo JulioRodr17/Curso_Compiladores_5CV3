@@ -29,7 +29,15 @@ class Scanner(private val source: String) {
                     }
                 }
 
-
+                1 -> {
+                    if (character.isLetterOrDigit()) {
+                        lexeme.append(character)
+                    } else {
+                        addToken(TokenType.IDENTIFIER, lexeme.toString(), lexemeStart + 1)
+                        state = 0; lexemeStart = 0; i--
+                        lexeme.delete(0, lexeme.length)
+                    }
+                }
             }
 
             i++
