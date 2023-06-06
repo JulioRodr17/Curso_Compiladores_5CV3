@@ -47,5 +47,17 @@ class Scanner(private val source: String) {
         return tokens
     }
 
-    
+    private fun addToken(type: TokenType = TokenType.IDENTIFIER, lexeme: String = "", position: Int = 0) {
+        if (type != TokenType.IDENTIFIER) {
+            tokens.add(Token(type, lexeme, position))
+            return
+        }
+        tokens.add(
+            Token(
+                keywords.getOrDefault(lexeme, TokenType.IDENTIFIER),
+                lexeme,
+                position
+            )
+        )
+    }
 }
