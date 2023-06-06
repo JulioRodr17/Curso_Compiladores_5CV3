@@ -11,4 +11,8 @@ class Token(
 
         return this.type == other.type
     }
+
+    override fun toString(): String {
+        return "$type $lexeme"
+    }
 }
