@@ -1,4 +1,4 @@
-package Org.Compiladores.Ascendente
+package org.Compiladores.Ascendente
 
 import java.util.*
 

@@ -1,4 +1,4 @@
-package Org.Compiladores.Ascendente
+package org.Compiladores.Ascendente
 
 class Token(
     private val type: TokenType,

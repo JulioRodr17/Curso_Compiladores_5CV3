@@ -2,18 +2,60 @@ package org.Compiladores.Kotlin
 
 
 
-enum class Ttoken{
+enum class TokenType{
 
-    ID, CAD, NUM,
-    // Crear un tipoToken por cada "Signo del lenguaje" (ver clase Scanner)
-    IZ_PAR, DER_PAR, IZ_LLAVE, DER_LLAVE, COMA, PUNTO, PUNTO_COMA, MENOS, MAS, MULTIPLICA, DIVIDE,
-    INV,NO_IGUAL,ASIGNAR,IGUAL,MENOR,MENOR_IGUAL,MAYOR,MAYOR_IGUAL,CMNTRIO_LINEA,CMNTRIO_PARRAFO,
-    
-    // Palabras clave:
-    Y, CLASE,
-
-    // Final de cadena
-    EOF
+    EOF,
+    CLASS,
+    ELSE,
+    FOR,
+    FUNCTION,
+    IF,
+    NULL,
+    PRINT,
+    RETURN,
+    SUPER,
+    THIS,
+    TRUE,
+    FALSE,
+    WHILE,
+    VAR,
+    AND,
+    OR,
+    NEWLINE,
+    LETTER,
+    NUMBER,
+    STRING,
+    IDENTIFIER,
+    LEFT_PAREN,
+    RIGHT_PAREN,
+    LEFT_BRACE,
+    RIGHT_BRACE,
+    RIGHT_CORCH,
+    LEFT_CORCH,
+    COMMA,
+    DOT,
+    SEMICOLON,
+    MINUS,
+    PORCENT,
+    UNDERSCORE,
+    INTERROGATIVE,
+    MINUS_EQUAL,
+    PLUS,
+    PLUS_EQUAL,
+    MULTIPLY,
+    MULTIPLY_EQUAL,
+    DIVIDE,
+    DIVIDE_EQUAL,
+    MOD,
+    MOD_EQUAL,
+    NOT,
+    EQUAL,
+    NOT_EQUAL,
+    ASSIGN,
+    LESS,
+    LESS_EQUAL,
+    GREATER,
+    GREATER_EQUAL,
 
    
 }
