@@ -38,6 +38,24 @@ class Token(){
         return "${tipo.name + lexema + literal}"
     }
 
+    override fun equals(other: Any?):Boolean{
+        if(other !is Token){
+            return false
+        }
+
+        return this.tipo == other.tipo
+
+    }
+
+
+    override fun hashCode(): Int {
+        var result = tipo.hashCode()
+        result = 31 * result + lexema.hashCode()
+        result = 31 * result + literal.hashCode()
+        result = 31 * result + linea
+        return result
+    }
+
     fun holaMundo():String{
         return "Hola mundo"
     }

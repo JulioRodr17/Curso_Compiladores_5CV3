@@ -1,5 +1,6 @@
 package org.Compiladores.Kotlin
 
+import com.sun.media.sound.RIFFReader
 
 
 public class Parser(private final var tokens: List<Token>) {
@@ -57,16 +58,13 @@ public class Parser(private final var tokens: List<Token>) {
         futuro = tokens[i]
         program()
 
-        if (!error && !futuro.equals(EOF)) {
-            println("Error")
-        }
-        else if (!error && futuro.equals(EOF)) {
-            println("Programa valido")
+        if(futuro == EOF){
+            println("Programa valido :)")
         }
     }
 
     private fun program() {
-        /*when (futuro) {
+        when (futuro) {
             NOT, MINUS, TRUE, FALSE, NULL, THIS, NUMBER,STRING, IDENTIFIER,
             LEFT_PAREN, SUPER, FOR, IF, PRINT, RETURN, WHILE,
             LEFT_BRACE, CLASS, VAR, FUN -> {
@@ -77,9 +75,26 @@ public class Parser(private final var tokens: List<Token>) {
                 throw Error("Error at ${futuro.linea} en la DECLARACION esperada")
             }
 
-        }*/
-        declarar()
+        }
+
+
     }
+
+
+    private fun match(t: Token){
+        if(t.tipo == futuro.tipo || futuro.tipo == t.tipo){
+            i++
+            futuro = tokens[i]
+        }
+        else{
+            throw Error("Error at ${futuro.linea} en la DECLARACION esperada")
+        }
+    }
+
+
+    // ---------------------------------------------------------------
+
+    // ---------------------------------------------------------------
 
     private fun declarar() {
         when (futuro) {
@@ -105,20 +120,7 @@ public class Parser(private final var tokens: List<Token>) {
         }
     }
 
-    private fun match(t: Token){
-        if(t == futuro){
-            i++
-            futuro = tokens[i]
-        }
-        else{
-            throw Error("Error at ${futuro.linea} en la DECLARACION esperada")
-        }
-    }
 
-
-    // ---------------------------------------------------------------
-
-    // ---------------------------------------------------------------
     private fun classDecl(){
         if(futuro == CLASS){
             match(CLASS)
@@ -126,7 +128,7 @@ public class Parser(private final var tokens: List<Token>) {
             classHer()
             match(LEFT_BRACE)
             funciones()
-
+            match(RIGHT_PAREN)
 
         }
         else {
