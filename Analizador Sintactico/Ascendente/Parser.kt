@@ -1,3 +1,5 @@
+package Org.Compiladores.Ascendente
+
 import java.util.*
 
 class Parser(private val tokens: List<Token>) {
@@ -197,7 +199,7 @@ class Parser(private val tokens: List<Token>) {
                 }
 
                 else -> {
-                    error(current.position, "Consulta no válida")
+
                     break
                 }
             }

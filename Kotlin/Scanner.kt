@@ -55,9 +55,6 @@ class Scanner{
 
         for(j in source){
 
-            var c: Char = if (j.code == this.source.length) '\u0000' else this.source[j.code]
-            var num = 0
-            num = if (c == '\n'){ ++num} else {num}
 
             when(estado){
                 

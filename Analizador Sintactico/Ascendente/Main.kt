@@ -1,3 +1,5 @@
+package Org.Compiladores.Ascendente
+
 var existErrors = false
 
 fun main(args: Array<String>) {
@@ -16,10 +18,9 @@ fun runPrompt() {
 fun run(source: String) {
     val scanner = Scanner(source)
     val tokens = scanner.scanTokens()
+    val parser = Parser(tokens)
 
-    for (token in tokens) {
-        println(token)
-    }
+    parser.parse()
 }
 
 fun error(line: Int, message: String) {

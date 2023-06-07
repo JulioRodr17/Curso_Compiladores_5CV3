@@ -1,3 +1,4 @@
+package Org.Compiladores.Ascendente
 enum class NonTerminalSymbol {
     Q,
     D,
