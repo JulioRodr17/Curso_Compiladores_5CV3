@@ -47,7 +47,7 @@ public class Parser(private final var tokens: List<Token>) {
 
 
 
-    private var futuro = Token(TokenType.EOF, "", null, 0)
+    private lateinit var futuro: Token
     private var i = 0
 
 
@@ -55,16 +55,18 @@ public class Parser(private final var tokens: List<Token>) {
     public fun parse() {
         i = 0
         futuro = tokens[i]
-
         program()
 
-        if (futuro == EOF) {
-            println("Programa Valido :)")
+        if (!error && !futuro.equals(EOF)) {
+            println("Error")
+        }
+        else if (!error && futuro.equals(EOF)) {
+            println("Programa valido")
         }
     }
 
     private fun program() {
-        when (futuro) {
+        /*when (futuro) {
             NOT, MINUS, TRUE, FALSE, NULL, THIS, NUMBER,STRING, IDENTIFIER,
             LEFT_PAREN, SUPER, FOR, IF, PRINT, RETURN, WHILE,
             LEFT_BRACE, CLASS, VAR, FUN -> {
@@ -75,7 +77,8 @@ public class Parser(private final var tokens: List<Token>) {
                 throw Error("Error at ${futuro.linea} en la DECLARACION esperada")
             }
 
-        }
+        }*/
+        declarar()
     }
 
     private fun declarar() {
@@ -103,7 +106,7 @@ public class Parser(private final var tokens: List<Token>) {
     }
 
     private fun match(t: Token){
-        if(futuro.tipo == t.tipo){
+        if(t == futuro){
             i++
             futuro = tokens[i]
         }
@@ -117,7 +120,7 @@ public class Parser(private final var tokens: List<Token>) {
 
     // ---------------------------------------------------------------
     private fun classDecl(){
-        if(futuro == FUN){
+        if(futuro == CLASS){
             match(CLASS)
             match(IDENTIFIER)
             classHer()
@@ -125,6 +128,9 @@ public class Parser(private final var tokens: List<Token>) {
             funciones()
 
 
+        }
+        else {
+            println("Se esperaba un identificador")
         }
     }
         private fun classHer(){

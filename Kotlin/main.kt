@@ -57,11 +57,11 @@ fun ejecutar(source: String){
     val tokens: List<Token> = scanner.scanTokens()
     val parser = Parser(tokens)
     parser.parse()
-/*
+
     for(token: Token in tokens){
         println(token)
     }
-*/
+
 
 
 

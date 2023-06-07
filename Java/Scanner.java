@@ -34,7 +34,7 @@ public class Scanner {
         palabrasReservadas.put("this", TipoToken.THIS);
         palabrasReservadas.put("true", TipoToken.TRUE);
         palabrasReservadas.put("while", TipoToken.WHILE);
-        palabrasReservadas.put("clase", TipoToken.CLASE);
+        palabrasReservadas.put("class", TipoToken.CLASE);
         palabrasReservadas.put("id", TipoToken.ID);
     }
 
