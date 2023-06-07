@@ -1,3 +1,4 @@
+package org.Compiladores.Descendente
 class Scanner(private val source: String) {
 
     private val tokens: MutableList<Token> = ArrayList()

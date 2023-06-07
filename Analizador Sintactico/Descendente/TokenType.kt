@@ -1,3 +1,4 @@
+package org.Compiladores.Descendente
 enum class TokenType {
     // Identificadores
     IDENTIFIER,
