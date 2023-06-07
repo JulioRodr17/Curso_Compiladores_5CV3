@@ -10,6 +10,13 @@ class Token(){
         this.linea = linea
     }
 
+    constructor(tipo: TokenType, lexema: String): this(){
+        this.tipo = tipo
+        this.lexema = lexema
+        this.literal = null
+        this.linea = 0
+    }
+
     final var tipo: TokenType = TokenType.EOF
     final var lexema: String = ""
     final var literal: Any? = null
@@ -24,6 +31,7 @@ class Token(){
         this.literal = literal 
         this.linea = linea
     }*/
+
 
     
     override fun toString(): String{

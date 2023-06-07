@@ -1,15 +1,15 @@
 package org.Compiladores.Kotlin
 
 
+import java.io.BufferedReader
 import java.io.IOException
+import java.io.InputStreamReader
 import java.nio.charset.Charset
 import java.nio.file.Files
 import java.nio.file.Paths
-import java.io.InputStreamReader
-import java.io.BufferedReader
 
 
-    var error: Boolean = false
+var error: Boolean = false
 
 
 
@@ -54,11 +54,14 @@ fun ejecutarArchivo(path: String){
 
 fun ejecutar(source: String){
     var scanner = Scanner(source)
-    val tokens: List<Token> =scanner.scanTokens()
-
+    val tokens: List<Token> = scanner.scanTokens()
+    val parser = Parser(tokens)
+    parser.parse()
+/*
     for(token: Token in tokens){
         println(token)
     }
+*/
 
 
 
@@ -79,4 +82,17 @@ fun ejecutarPrompt(){
     }while(v == true)
 
 
+}
+
+fun error(numberLine: Int, message: String?) {
+    if (message != null) {
+        report(numberLine, "", message)
+    }
+}
+
+private fun report(numberLine: Int, where: String, message: String) {
+    System.err.println(
+        "[line $numberLine] Error$where: $message"
+    )
+    error = true
 }

@@ -3,26 +3,13 @@ package org.Compiladores.Kotlin
 
 
 enum class TokenType{
+    //Funciones
+    EOF, CLASS,  ELSE, FOR, FUNCTION, IF, NULL, PRINT,
 
-    EOF,
-    CLASS,
-    ELSE,
-    FOR,
-    FUNCTION,
-    IF,
-    NULL,
-    PRINT,
-    RETURN,
-    SUPER,
-    THIS,
-    TRUE,
-    FALSE,
-    WHILE,
-    VAR,
-    AND,
-    OR,
-    NEWLINE,
-    LETTER,
+    //
+    RETURN, SUPER, THIS, TRUE, FALSE, WHILE, VAR, AND, OR, NEWLINE, LETTER,
+
+
     NUMBER,
     STRING,
     IDENTIFIER,
@@ -55,7 +42,8 @@ enum class TokenType{
     LESS,
     LESS_EQUAL,
     GREATER,
-    GREATER_EQUAL,
+    GREATER_EQUAL
+
 
    
 }

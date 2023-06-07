@@ -12,6 +12,7 @@ enum class TokenType {
     COMMA,
     DOT,
     ASTERISK,
+    EPSILON,
 
     // Final de cadena
     EOF,
