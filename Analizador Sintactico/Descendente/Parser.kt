@@ -63,7 +63,44 @@ class Parser(private val tokens: List<Token>) {
 
 
     fun parse() {
+        var i = 0
+        var lookahead = tokens[i]
+        stack.push(eof)
+        stack.push("Q")
 
+        var topValueStack = stack.peek()
+
+        while (stack.isNotEmpty() && i < (tokens.size - 1)) {
+
+            if (lookahead == topValueStack) {
+                stack.pop()
+                lookahead = tokens[++i]
+            }
+            else if (topValueStack is Token) {
+                error(lookahead.position, "Consulta no válida")
+                return
+            }
+            else if (getProductions(topValueStack, lookahead).isNullOrEmpty()) {
+                error(lookahead.position, "Consulta no válida")
+                return
+            }
+            else {
+                val productions = getProductions(topValueStack, lookahead)?.toMutableList()
+                stack.pop()
+                while (!productions.isNullOrEmpty()) {
+                    val lastProduction = productions.last()
+
+                    if (lastProduction != epsilon) {
+                        stack.push(lastProduction)
+                    }
+
+                    productions.remove(lastProduction)
+                }
+            }
+
+            topValueStack = stack.peek()
+        }
+        println("Consulta válida")
     }
 
     private fun getProductions(topValueStack: Any, lookahead: Token)
