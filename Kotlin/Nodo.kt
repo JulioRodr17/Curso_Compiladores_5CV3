@@ -7,7 +7,7 @@ class Nodo() {
 
 
     constructor(value: Token?): this(){
-        this.value = value
+        this.value = value!! //duda :(
     }
 
 

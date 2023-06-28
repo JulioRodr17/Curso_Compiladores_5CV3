@@ -12,10 +12,10 @@ class SolverAritmetico internal constructor(private var nodo: Nodo) {
     private fun resolver(n: Nodo): Any? {
         // No tiene hijos, es un operando
         if (n.getHijos() == null) {
-            if (n.getValue().tipo === TokenType.NUMBER|| n.getValue().tipo === TokenType.STRING) {
+            if (n.getValue().tipo == TokenType.NUMBER|| n.getValue().tipo == TokenType.STRING) {
                 return n.getValue().literal
             }
-            else if (n.getValue().tipo === TokenType.IDENTIFIER) {
+            else if (n.getValue().tipo == TokenType.IDENTIFIER) {
                 // Ver la tabla de símbolos
             }
 
@@ -38,7 +38,7 @@ class SolverAritmetico internal constructor(private var nodo: Nodo) {
                 else -> {}
             }
         } else if (resultadoIzquierdo is String && resultadoDerecho is String) {
-            if (n.getValue().tipo === TokenType.PLUS) {
+            if (n.getValue().tipo == TokenType.PLUS) {
                 // Ejecutar la concatenación
             }
         } else {

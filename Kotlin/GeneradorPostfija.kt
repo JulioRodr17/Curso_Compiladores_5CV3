@@ -19,7 +19,7 @@ class GeneradorPostfija internal constructor(private var infija: List<Token>) {
         val pilaEstructurasDeControl = Stack<Token>()
         for (i in infija.indices) {
             val t = infija[i]
-            if (t.tipo === TokenType.EOF) {
+            if (t.tipo == TokenType.EOF) {
                 break
             }
             if (t.esPalabraReservada()) {
@@ -66,11 +66,11 @@ class GeneradorPostfija internal constructor(private var infija: List<Token>) {
                 // Se mete a la pila, tal como el parentesis. Este paso
                 // pudiera omitirse, sólo hay que tener cuidado en el manejo
                 // del "}".
-                pila!!.push(t)
+                pila.push(t)
             } else if (t.tipo == TokenType.RIGHT_BRACE && estructuraDeControl) {
 
                 // Primero verificar si hay un else:
-                if (infija[i + 1].tipo === TokenType.ELSE) {
+                if (infija[i + 1].tipo == TokenType.ELSE) {
                     // Sacar el "{" de la pila
                     pila.pop()
                 } else {
@@ -87,7 +87,7 @@ class GeneradorPostfija internal constructor(private var infija: List<Token>) {
                     /*
                         Si se da este caso, es necesario extraer el IF de la pila
                         pilaEstructurasDeControl, y agregar los ";" correspondientes
-                     */if (aux.tipo === TokenType.ELSE) {
+                     */if (aux.tipo == TokenType.ELSE) {
                         pilaEstructurasDeControl.pop()
                         postfija.add(Token(TokenType.SEMICOLON, ";", null))
                     }
