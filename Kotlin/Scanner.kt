@@ -19,7 +19,7 @@ class Scanner internal constructor(private val source: String){
         keywords["else"] = TokenType.ELSE
         keywords["class"] = TokenType.CLASS
         keywords["for"] = TokenType.FOR
-        keywords["func"] = TokenType.FUNCTION
+        keywords["fun"] = TokenType.FUNCTION
         keywords["if"] = TokenType.IF
         keywords["null"] = TokenType.NULL
         keywords["print"] = TokenType.PRINT

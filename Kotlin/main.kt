@@ -13,7 +13,6 @@ var error: Boolean = false
 
 
 
-
 @kotlin.jvm.Throws fun main(args: Array<String>){
     IOException()
     if(args.size > 1){
@@ -58,11 +57,19 @@ fun ejecutar(source: String){
     val parser = Parser(tokens)
     parser.parse()
 
-    for(token: Token in tokens){
-        println(token)
-    }
+   // for(token: Token in tokens){
+     //   println(token)
+    //}
 
 
+
+    val gpf = GeneradorPostfija(tokens)
+    val postfija = gpf.convertir()
+
+
+    val gast = GeneradorAST(postfija)
+    val programa = gast.generarAST()
+    programa.recorrer()
 
 
 }

@@ -17,6 +17,20 @@ class Token(){
         this.linea = 0
     }
 
+    constructor(tipo: TokenType, lexema: String, literal: Any?): this(){
+        this.tipo = tipo
+        this.lexema = lexema
+        this.literal = null
+        this.linea = 0
+    }
+
+    constructor(literal: Any?): this(){
+        this.tipo = tipo
+        this.lexema = lexema
+        this.literal = null
+        this.linea = 0
+    }
+
     final var tipo: TokenType = TokenType.EOF
     final var lexema: String = ""
     final var literal: Any? = null
@@ -56,11 +70,73 @@ class Token(){
         return result
     }
 
+
+
+
+
     fun holaMundo():String{
         return "Hola mundo"
     }
 
-   
+
+    fun esOperando(): Boolean {
+        return when (this.tipo) {
+            TokenType.IDENTIFIER, TokenType.NUMBER, TokenType.STRING, TokenType.TRUE, TokenType.FALSE -> true
+            else -> false
+        }
+    }
+
+    fun esOperador(): Boolean {
+        return when (this.tipo) {
+            TokenType.PLUS, TokenType.MINUS, TokenType.MULTIPLY, TokenType.DIVIDE,
+            TokenType.EQUAL, TokenType.NOT_EQUAL, TokenType.GREATER, TokenType.GREATER_EQUAL,
+            TokenType.LESS, TokenType.LESS_EQUAL, TokenType.AND, TokenType.OR, TokenType.ASSIGN -> true
+            else -> false
+        }
+    }
+
+    fun esPalabraReservada(): Boolean {
+        return when (this.tipo) {
+            TokenType.VAR, TokenType.IF, TokenType.PRINT,
+            TokenType.ELSE, TokenType.WHILE, TokenType.FOR -> true
+            else -> false
+        }
+    }
+
+    fun esEstructuraDeControl(): Boolean {
+        return when (this.tipo) {
+            TokenType.FOR, TokenType.WHILE, TokenType.IF, TokenType.ELSE -> true
+            else -> false
+        }
+    }
+
+    fun precedenciaMayorIgual(t: Token): Boolean {
+        return tenerPrecedencia() >= t.tenerPrecedencia()
+    }
+
+
+    private fun tenerPrecedencia(): Int {
+        when (this.tipo) {
+            TokenType.MULTIPLY, TokenType.DIVIDE -> return 7
+            TokenType.PLUS, TokenType.MINUS -> return 6
+            TokenType.LESS, TokenType.LESS_EQUAL, TokenType.GREATER, TokenType.GREATER_EQUAL -> return 5
+            TokenType.EQUAL, TokenType.NOT_EQUAL -> return 4
+            TokenType.AND, TokenType.OR -> return 3
+            TokenType.ASSIGN -> return 1
+            else -> {}
+        }
+        return 0
+    }
+
+    fun aridad(): Int {
+        when (this.tipo) {
+            TokenType.MULTIPLY, TokenType.DIVIDE, TokenType.PLUS, TokenType.MINUS,
+            TokenType.EQUAL, TokenType.ASSIGN, TokenType.NOT_EQUAL, TokenType.GREATER,
+            TokenType.GREATER_EQUAL, TokenType.LESS, TokenType.LESS_EQUAL, TokenType.AND, TokenType.OR -> return 2
+            else -> {}
+        }
+        return 0
+    }
 
 }
 

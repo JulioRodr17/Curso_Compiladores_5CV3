@@ -93,7 +93,7 @@ public class Parser(private final var tokens: List<Token>) {
 
 
     // ---------------------------------------------------------------
-
+        //Declaraciones
     // ---------------------------------------------------------------
 
     private fun declarar() {
@@ -128,7 +128,7 @@ public class Parser(private final var tokens: List<Token>) {
             classHer()
             match(LEFT_BRACE)
             funciones()
-            match(RIGHT_PAREN)
+            match(RIGHT_BRACE)
 
         }
         else {
@@ -276,7 +276,7 @@ public class Parser(private final var tokens: List<Token>) {
                 NOT, MINUS, TRUE, FALSE, NULL, THIS, NUMBER, STRING,
                 IDENTIFIER, LEFT_PAREN, SUPER -> {
                     expresion()
-                    match(SEMICOLON)
+                   // match(SEMICOLON)
                 }
             }
         }
@@ -357,10 +357,40 @@ public class Parser(private final var tokens: List<Token>) {
         }
     }
         private fun blockDecl(){
+
+            /*
+
+            NOT, MINUS, TRUE, FALSE, NULL, THIS, NUMBER, STRING,
+            IDENTIFIER, LEFT_PAREN, SUPER -> {
+                expresionDecl()
+            }
+            FOR -> {
+                forExp()
+            }
+            IF -> {
+                ifExp()
+            }
+            PRINT -> {
+                printExp()
+            }
+            RETURN -> {
+                returnExp()
+            }
+            WHILE -> {
+                whileExp()
+            }
+            LEFT_BRACE -> {
+                block()
+            }
+
+             */
+
+
+
             when(futuro){
                 NOT, MINUS, TRUE, FALSE, NULL, THIS, NUMBER, STRING,
-                IDENTIFIER, LEFT_PAREN, SUPER -> {
-                    declarar()
+                IDENTIFIER, LEFT_PAREN, SUPER, PRINT, FOR, IF, RETURN, WHILE, LEFT_BRACE -> {
+                    declaracion()
                     blockDecl()
                 }
             }
