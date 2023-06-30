@@ -1,14 +1,16 @@
 package org.Compiladores.Kotlin
 
-class Arbol internal constructor(private var raiz: Nodo)  {
+class Arbol (private var raiz: Nodo) {
 
 
     fun recorrer() {
-        for ( n: Nodo in raiz.getHijos()) {
+        for (n in raiz.getHijos()!!) {
             val t: Token = n.getValue()
 
             when (t.tipo) {
-                 TokenType.PLUS,TokenType.MINUS, TokenType.MULTIPLY, TokenType.DIVIDE-> {
+                TokenType.PLUS, TokenType.MINUS, TokenType.MULTIPLY, TokenType.DIVIDE, TokenType.LESS,
+                TokenType.GREATER, TokenType.LESS_EQUAL, TokenType.GREATER_EQUAL, TokenType.EQUAL,
+                TokenType.NOT_EQUAL, TokenType.AND, TokenType.OR -> {
                     var solver: SolverAritmetico = SolverAritmetico(n)
                     val res: Any? = solver.resolver()
                     println(res)
@@ -16,11 +18,21 @@ class Arbol internal constructor(private var raiz: Nodo)  {
                 }
 
                 TokenType.VAR -> {}
-                TokenType.IF -> {}
+                TokenType.IF -> {
+                    var ifsolver = ifSolver(n)
+                    val res: Any? = ifsolver.resolver()
+                    println(res)
+                }
+
+                TokenType.PRINT ->{
+                    var printsolver = printSolver(n)
+                    println(printsolver.imprimir())
+                }
+
 
                 else ->{}
+
             }
         }
     }
-
 }

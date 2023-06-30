@@ -225,7 +225,7 @@ class Scanner internal constructor(private val source: String){
                 } else {
                     i--
                     state = 0
-                    addToken(TokenType.NUMBER, lexeme.toString(), lexeme.toString().toInt())
+                    addToken(TokenType.NUMBER, lexeme.toString(), lexeme.toString().toDouble())
                 }
 
                 13 -> if (currentCharacter >= '0' && currentCharacter <= '9') {
@@ -243,7 +243,7 @@ class Scanner internal constructor(private val source: String){
                 } else {
                     i--
                     state = 0
-                    addToken(TokenType.NUMBER, lexeme.toString(), lexeme.toString().toFloat())
+                    addToken(TokenType.NUMBER, lexeme.toString(), lexeme.toString().toDouble())
                 }
 
                 15 -> if (currentCharacter >= '0' && currentCharacter <= '9') {

@@ -1,32 +1,25 @@
 package org.Compiladores.Kotlin
 
 import java.util.*
+import kotlin.collections.ArrayList
 
-class GeneradorPostfija internal constructor(private var infija: List<Token>) {
+class GeneradorPostfija (private var infija: List<Token>) {
 
-
-    private lateinit var pila: Stack<Token>
-    private lateinit var postfija: MutableList<Token>
-
-    init {
-        this.infija = infija
-        pila = Stack()
-        postfija = ArrayList()
-    }
+    val pila = Stack<Token>()
+    val postfija = ArrayList<Token>()
 
     fun convertir(): List<Token> {
         var estructuraDeControl = false
         val pilaEstructurasDeControl = Stack<Token>()
+
         for (i in infija.indices) {
             val t = infija[i]
             if (t.tipo == TokenType.EOF) {
                 break
             }
             if (t.esPalabraReservada()) {
-                /*
-                 Si el token actual es una palabra reservada, se va directo a la
-                 lista de salida.
-                 */
+
+
                 postfija.add(t)
                 if (t.esEstructuraDeControl()) {
                     estructuraDeControl = true
@@ -36,7 +29,7 @@ class GeneradorPostfija internal constructor(private var infija: List<Token>) {
                 postfija.add(t)
             } else if (t.tipo == TokenType.LEFT_PAREN) {
                 pila.push(t)
-            } else if (t.tipo == TokenType.RIGHT_BRACE) {
+            } else if (t.tipo == TokenType.RIGHT_PAREN) {
                 while (!pila.isEmpty() && pila.peek().tipo !== TokenType.LEFT_PAREN) {
                     val temp = pila.pop()
                     postfija.add(temp)
@@ -84,10 +77,9 @@ class GeneradorPostfija internal constructor(private var infija: List<Token>) {
                     // Se extrae de la pila de estrucuras de control, el elemento en el tope
                     val aux = pilaEstructurasDeControl.pop()
 
-                    /*
-                        Si se da este caso, es necesario extraer el IF de la pila
-                        pilaEstructurasDeControl, y agregar los ";" correspondientes
-                     */if (aux.tipo == TokenType.ELSE) {
+
+
+                     if (aux.tipo == TokenType.ELSE) {
                         pilaEstructurasDeControl.pop()
                         postfija.add(Token(TokenType.SEMICOLON, ";", null))
                     }

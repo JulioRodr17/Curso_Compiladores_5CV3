@@ -1,6 +1,6 @@
 package org.Compiladores.Kotlin
 
-class SolverAritmetico internal constructor(private var nodo: Nodo) {
+class SolverAritmetico(private val nodo: Nodo) {
 
 
 
@@ -17,17 +17,18 @@ class SolverAritmetico internal constructor(private var nodo: Nodo) {
             }
             else if (n.getValue().tipo == TokenType.IDENTIFIER) {
                 // Ver la tabla de símbolos
+                return TabladeSimbolos.getValor(n.getValue().lexema)
             }
 
         }
 
         // Por simplicidad se asume que la lista de hijos del nodo tiene dos elementos
-        val izq: Nodo = n.getHijos()[0]
-        val der: Nodo = n.getHijos()[1]
+        val izq: Nodo? = n.getHijos()?.get(0)
+        val der: Nodo? = n.getHijos()?.get(1)
 
 
-        val resultadoIzquierdo: Any? = resolver(izq)
-        val resultadoDerecho: Any? = resolver(der)
+        val resultadoIzquierdo: Any? = izq?.let { resolver(it) }
+        val resultadoDerecho: Any? = der?.let { resolver(it) }
 
         if (resultadoIzquierdo is Double && resultadoDerecho is Double) {
             when (n.getValue().tipo) {
@@ -35,14 +36,37 @@ class SolverAritmetico internal constructor(private var nodo: Nodo) {
                 TokenType.MINUS-> return resultadoIzquierdo - resultadoDerecho
                 TokenType.MULTIPLY-> return resultadoIzquierdo * resultadoDerecho
                 TokenType.DIVIDE -> return resultadoIzquierdo / resultadoDerecho
-                else -> {}
+                TokenType.GREATER -> return resultadoIzquierdo > resultadoDerecho
+                TokenType.GREATER_EQUAL -> return resultadoIzquierdo >= resultadoDerecho
+                TokenType.LESS -> return resultadoIzquierdo < resultadoDerecho
+                TokenType.LESS_EQUAL -> return resultadoIzquierdo <= resultadoDerecho
+                TokenType.EQUAL -> return resultadoIzquierdo == resultadoDerecho
+                TokenType.NOT_EQUAL -> return resultadoIzquierdo != resultadoDerecho
+
+
+                else -> return null
             }
         } else if (resultadoIzquierdo is String && resultadoDerecho is String) {
-            if (n.getValue().tipo == TokenType.PLUS) {
-                // Ejecutar la concatenación
+            when(n.getValue().tipo){
+                TokenType.EQUAL -> return resultadoIzquierdo == resultadoDerecho
+                TokenType.NOT_EQUAL -> return resultadoIzquierdo != resultadoDerecho
+
+
+                else -> return null
             }
-        } else {
+        } else if(resultadoIzquierdo is Boolean && resultadoDerecho is Boolean) {
             // Error por diferencia de tipos
+            when(n.getValue().tipo){
+                TokenType.AND -> return resultadoIzquierdo && resultadoDerecho
+                TokenType.OR -> return resultadoIzquierdo || resultadoDerecho
+                TokenType.EQUAL -> return resultadoIzquierdo == resultadoDerecho
+                TokenType.NOT_EQUAL -> return resultadoIzquierdo != resultadoDerecho
+                else -> return null
+            }
+
+        }
+        else{
+
         }
         return null
     }

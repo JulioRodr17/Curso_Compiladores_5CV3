@@ -1,31 +1,24 @@
 package org.Compiladores.Kotlin
 
-class Nodo() {
+class Nodo(private val value: Token) {
 
-    private var value: Token = Token( null)
-    private lateinit var hijos: MutableList<Nodo>
-
-
-    constructor(value: Token?): this(){
-        this.value = value!! //duda :(
-    }
-
+    private var hijos: MutableList<Nodo>? = null
 
     fun insertarHijo(n: Nodo) {
         if (hijos == null) {
-            hijos = ArrayList()
-            hijos.add(n)
+            hijos = mutableListOf<Nodo>()
+            hijos?.add(n)
         } else {
-            hijos.add(0, n)
+            hijos?.add(0, n)
         }
     }
 
     fun insertarSiguienteHijo(n: Nodo) {
         if (hijos == null) {
             hijos = ArrayList()
-            hijos.add(n)
+            hijos?.add(n)
         } else {
-            hijos.add(n)
+            hijos?.add(n)
         }
     }
 
@@ -34,7 +27,7 @@ class Nodo() {
             hijos = ArrayList()
         }
         for (n in nodosHijos) {
-            hijos.add(n)
+            hijos?.add(n)
         }
     }
 
@@ -44,7 +37,7 @@ class Nodo() {
         return value
     }
 
-    fun getHijos(): List<Nodo> {
+    fun getHijos(): MutableList<Nodo>? {
         return hijos
     }
 }

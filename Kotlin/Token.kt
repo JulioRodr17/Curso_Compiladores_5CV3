@@ -70,18 +70,9 @@ class Token(){
         return result
     }
 
-
-
-
-
-    fun holaMundo():String{
-        return "Hola mundo"
-    }
-
-
     fun esOperando(): Boolean {
         return when (this.tipo) {
-            TokenType.IDENTIFIER, TokenType.NUMBER, TokenType.STRING, TokenType.TRUE, TokenType.FALSE -> true
+            TokenType.IDENTIFIER, TokenType.NUMBER, TokenType.STRING -> true
             else -> false
         }
     }
@@ -121,7 +112,8 @@ class Token(){
             TokenType.PLUS, TokenType.MINUS -> return 6
             TokenType.LESS, TokenType.LESS_EQUAL, TokenType.GREATER, TokenType.GREATER_EQUAL -> return 5
             TokenType.EQUAL, TokenType.NOT_EQUAL -> return 4
-            TokenType.AND, TokenType.OR -> return 3
+            TokenType.AND -> return 3
+            TokenType.OR -> return 2
             TokenType.ASSIGN -> return 1
             else -> {}
         }
