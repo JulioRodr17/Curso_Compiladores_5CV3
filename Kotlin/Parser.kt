@@ -59,7 +59,7 @@ public class Parser(private final var tokens: List<Token>) {
         program()
 
         if(futuro == EOF){
-            println("Funciona")
+            //println("Funciona")
         }
     }
 

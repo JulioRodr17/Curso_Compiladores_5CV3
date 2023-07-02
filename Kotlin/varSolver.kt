@@ -9,21 +9,32 @@ class varSolver(private var nodo: Nodo) {
 
     fun sol(n: Nodo){
 
-
+        var tabladeSimbolos = TabladeSimbolos
+        //println("tabladeSimbolos ${tabladeSimbolos}")
         val aritmeticosolver: SolverAritmetico
+        //println("aritmeticosolver ${aritmeticosolver}")
 
+        val registrarVarIzq: Nodo? = n.getHijos()?.get(0)
+        //println("registrarVarIzq ${registrarVarIzq}")
 
-       val registrarVarIzq: Nodo? = n.getHijos()?.get(0)
-       val registrarVarDer = if(n.getHijos()?.size!! > 1){n.getHijos()?.get(1)}else{null}
+        //println("n.getHijos()?.size ${n.getHijos()?.size}")
+        val hijosSize = if(n.getHijos()?.size != null) n.getHijos()?.size else 0
+        val registrarVarDer: Nodo? = if(hijosSize!! > 1) {n.getHijos()?.get(1)} else {null}
+        //println("registrarVarDer ${registrarVarDer}")
 
-       aritmeticosolver = SolverAritmetico(registrarVarDer!!)
+        aritmeticosolver = SolverAritmetico(registrarVarDer!!)
 
-       val izq: String = registrarVarIzq!!.getValue().lexema
-       val der: Any? = registrarVarDer == aritmeticosolver.resolver()
+        val izq: String = registrarVarIzq!!.getValue().lexema
+        //println("izq ${izq}")
+        val der: Any? = registrarVarDer == aritmeticosolver.resolver()
+        println("der: ${der}")
 
-       var tabladeSimbolos = TabladeSimbolos
 
         tabladeSimbolos.addVariable(izq, der)
+
+
+
+        println("der: ${der}")
 
 
     }

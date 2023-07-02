@@ -37,9 +37,6 @@ class GeneradorAST(private val postfija: List<Token>) {
             }
             else if (t.tipo == TokenType.SEMICOLON) {
                 if (pila.isEmpty()) {
-
-
-
                     pilaPadres.pop()
                             padre = pilaPadres.peek()
                             }
@@ -47,17 +44,14 @@ class GeneradorAST(private val postfija: List<Token>) {
 
                     val n = pila.pop()
                     if (padre.getValue().tipo == TokenType.VAR) {
-
-
-
-                    if (n.getValue().tipo == TokenType.EQUAL) {
-                    padre.insertarHijos(n.getHijos()!!)
-                    }
-                    else {
-                    padre.insertarSiguienteHijo(n)
-                    }
-                    pilaPadres.pop()
-                    padre = pilaPadres.peek()
+                        if (n.getValue().tipo == TokenType.ASSIGN) {
+                            padre.insertarHijos(n.getHijos()!!)
+                        }
+                        else {
+                            padre.insertarSiguienteHijo(n)
+                        }
+                        pilaPadres.pop()
+                        padre = pilaPadres.peek()
                     }
                     else if (padre.getValue().tipo == TokenType.PRINT) {
                     padre.insertarSiguienteHijo(n)

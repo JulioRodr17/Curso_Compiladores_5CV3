@@ -1,18 +1,12 @@
 package org.Compiladores.Kotlin
 
-
-import java.util.Objects
-
 class SolverAritmetico(private val nodo: Nodo) {
-
-
-
-
     fun resolver(): Any? {
         return resolver(nodo)
     }
 
     private fun resolver(n: Nodo): Any? {
+        var tabladeSimbolos = TabladeSimbolos
         // No tiene hijos, es un operando
         if (n.getHijos() == null) {
             if (n.getValue().tipo == TokenType.NUMBER|| n.getValue().tipo == TokenType.STRING) {
@@ -20,13 +14,12 @@ class SolverAritmetico(private val nodo: Nodo) {
             }
             else if (n.getValue().tipo == TokenType.IDENTIFIER) {
                 // Ver la tabla de símbolos
-                return TabladeSimbolos.getValor(n.getValue().lexema)
+                return tabladeSimbolos.getValor(n.getValue().lexema)
             }
             else if (n.getValue().tipo == TokenType.TRUE || n.getValue().tipo == TokenType.FALSE) {
-                return n.getValue().tipo
+                val a = n.getValue().lexema.toBoolean()
+                return a
             }
-
-
 
         }
 

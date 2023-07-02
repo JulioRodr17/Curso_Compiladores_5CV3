@@ -113,7 +113,7 @@ class Token(){
             TokenType.LESS, TokenType.LESS_EQUAL, TokenType.GREATER, TokenType.GREATER_EQUAL -> return 5
             TokenType.EQUAL, TokenType.NOT_EQUAL -> return 4
             TokenType.AND -> return 3
-            TokenType.OR -> return 3
+            TokenType.OR -> return 2
             TokenType.ASSIGN -> return 1
             else -> {}
         }
