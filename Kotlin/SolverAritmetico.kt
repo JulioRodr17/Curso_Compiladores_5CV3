@@ -1,5 +1,8 @@
 package org.Compiladores.Kotlin
 
+
+import java.util.Objects
+
 class SolverAritmetico(private val nodo: Nodo) {
 
 
@@ -19,6 +22,11 @@ class SolverAritmetico(private val nodo: Nodo) {
                 // Ver la tabla de símbolos
                 return TabladeSimbolos.getValor(n.getValue().lexema)
             }
+            else if (n.getValue().tipo == TokenType.TRUE || n.getValue().tipo == TokenType.FALSE) {
+                return n.getValue().tipo
+            }
+
+
 
         }
 
@@ -50,6 +58,7 @@ class SolverAritmetico(private val nodo: Nodo) {
             when(n.getValue().tipo){
                 TokenType.EQUAL -> return resultadoIzquierdo == resultadoDerecho
                 TokenType.NOT_EQUAL -> return resultadoIzquierdo != resultadoDerecho
+                TokenType.PLUS -> return resultadoIzquierdo + resultadoDerecho
 
 
                 else -> return null
@@ -65,9 +74,7 @@ class SolverAritmetico(private val nodo: Nodo) {
             }
 
         }
-        else{
 
-        }
         return null
     }
 }

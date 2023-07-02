@@ -17,7 +17,15 @@ class Arbol (private var raiz: Nodo) {
 
                 }
 
-                TokenType.VAR -> {}
+                TokenType.ASSIGN -> {
+                    var assignsolver = assignSolver(n)
+                    val res: Any? = assignsolver.asignar()
+                }
+                TokenType.VAR -> {
+                    var varsolver = varSolver(n)
+                    val res: Any? = varsolver.registrar()
+
+                }
                 TokenType.IF -> {
                     var ifsolver = ifSolver(n)
                     val res: Any? = ifsolver.resolver()

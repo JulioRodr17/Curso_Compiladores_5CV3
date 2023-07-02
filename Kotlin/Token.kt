@@ -72,7 +72,7 @@ class Token(){
 
     fun esOperando(): Boolean {
         return when (this.tipo) {
-            TokenType.IDENTIFIER, TokenType.NUMBER, TokenType.STRING -> true
+            TokenType.IDENTIFIER, TokenType.NUMBER, TokenType.STRING, TokenType.TRUE, TokenType.FALSE -> true
             else -> false
         }
     }
@@ -113,7 +113,7 @@ class Token(){
             TokenType.LESS, TokenType.LESS_EQUAL, TokenType.GREATER, TokenType.GREATER_EQUAL -> return 5
             TokenType.EQUAL, TokenType.NOT_EQUAL -> return 4
             TokenType.AND -> return 3
-            TokenType.OR -> return 2
+            TokenType.OR -> return 3
             TokenType.ASSIGN -> return 1
             else -> {}
         }
