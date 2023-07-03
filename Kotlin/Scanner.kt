@@ -30,6 +30,9 @@ class Scanner internal constructor(private val source: String){
         keywords["false"] = TokenType.FALSE
         keywords["while"] = TokenType.WHILE
         keywords["var"] = TokenType.VAR
+        keywords["and"] = TokenType.AND
+        keywords["or"] = TokenType.OR
+
     }
 
     fun scanTokens(): List<Token> {
@@ -90,12 +93,6 @@ class Scanner internal constructor(private val source: String){
                         lexeme.append(currentCharacter)
                     } else if (currentCharacter == '%') {
                         state = 22
-                        lexeme.append(currentCharacter)
-                    } else if (currentCharacter == '&') {
-                        state = 23
-                        lexeme.append(currentCharacter)
-                    } else if (currentCharacter == '|') {
-                        state = 24
                         lexeme.append(currentCharacter)
                     } else if (Character.isLetter(currentCharacter)) {
                         state = 25

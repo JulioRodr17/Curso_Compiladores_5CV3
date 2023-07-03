@@ -8,7 +8,7 @@ class ifSolver(private var nodo: Nodo) {
     }
 
     fun sol(n: Nodo){
-        var arbol: Arbol
+        var arbol: Arbol?
         var solverAritmetico: SolverAritmetico
 
         var hijo: MutableList<Nodo>? = n.getHijos()
@@ -32,11 +32,11 @@ class ifSolver(private var nodo: Nodo) {
         if(resultadoCond is Boolean){
             if(resultadoCond){
                 arbol = Arbol(cuerpoIf!!)
-                arbol.recorrer()
+                arbol?.recorrer()
             }
             else if(cuerpoElse != null){
-                arbol = Arbol(cuerpoIf!!)
-                arbol.recorrer()
+                arbol =if(cuerpoElse != null){ Arbol(cuerpoElse)} else {null}
+                arbol?.recorrer()
             }
         }
         else {

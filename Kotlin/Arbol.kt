@@ -38,6 +38,16 @@ class Arbol (private var raiz: Nodo) {
                     var printsolver = printSolver(n)
                     println(printsolver.imprimir())
                 }
+                TokenType.WHILE -> {
+                    var whilesolver = whileSolver(n)
+                    val res: Any? = whilesolver.ciclar()
+                    println(res)
+                }
+                TokenType.FOR -> {
+                    var forsolver = forSolver(n)
+                    val res: Any? = forsolver.para()
+                    println(res)
+                }
 
 
                 else ->{}

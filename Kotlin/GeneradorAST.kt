@@ -11,6 +11,7 @@ class GeneradorAST(private val postfija: List<Token>) {
         val raiz = Nodo(postfija[postfija.size - 1])
         pilaPadres.push(raiz)
         var padre: Nodo = raiz
+
         for (t: Token in postfija) {
             if (t.tipo == TokenType.EOF) {
                 break

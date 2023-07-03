@@ -3,10 +3,10 @@ package org.Compiladores.Kotlin
 class assignSolver(private var nodo: Nodo){
 
     fun asignar() {
-        solve(nodo)
+        sol(nodo)
     }
 
-    private fun solve(n: Nodo) {
+    fun sol(n: Nodo) {
         val tabladeSimbolos = TabladeSimbolos
         val arithmeticSolver: SolverAritmetico
         var arbol: Arbol

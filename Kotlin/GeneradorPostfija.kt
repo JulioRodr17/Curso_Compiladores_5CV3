@@ -18,8 +18,6 @@ class GeneradorPostfija (private var infija: List<Token>) {
                 break
             }
             if (t.esPalabraReservada()) {
-
-
                 postfija.add(t)
                 if (t.esEstructuraDeControl()) {
                     estructuraDeControl = true
@@ -29,13 +27,16 @@ class GeneradorPostfija (private var infija: List<Token>) {
                 postfija.add(t)
             } else if (t.tipo == TokenType.LEFT_PAREN) {
                 pila.push(t)
-            } else if (t.tipo == TokenType.RIGHT_PAREN) {
+            }
+            else if (t.tipo == TokenType.RIGHT_PAREN) {
                 while (!pila.isEmpty() && pila.peek().tipo !== TokenType.LEFT_PAREN) {
                     val temp = pila.pop()
                     postfija.add(temp)
                 }
-                if (pila.peek().tipo == TokenType.LEFT_PAREN) {
-                    pila.pop()
+                if(!pila.isEmpty()) {
+                    if (pila.peek().tipo == TokenType.LEFT_PAREN) {
+                        pila.pop()
+                    }
                 }
 
                 // Esta sección de aquí es para manejar el ")" que cierra la
