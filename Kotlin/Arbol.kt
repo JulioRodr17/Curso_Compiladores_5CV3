@@ -17,7 +17,6 @@ class Arbol (private var raiz: Nodo) {
 
                 }
 
-
                 TokenType.VAR -> {
                     var varsolver = varSolver(n)
                     val res: Any? = varsolver.registrar()
@@ -36,7 +35,7 @@ class Arbol (private var raiz: Nodo) {
 
                 TokenType.PRINT ->{
                     var printsolver = printSolver(n)
-                    println(printsolver.imprimir())
+                    printsolver.imprimir()
                 }
                 TokenType.WHILE -> {
                     var whilesolver = whileSolver(n)
